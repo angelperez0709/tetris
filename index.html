@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <script defer src="./index.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="tetris-container">
+        <canvas id="tetris"> </canvas>
+      </div>
+      <div id="data" class="start">
+        <span>Puntuación: <span id="points">0</span></span>
+        <div class="">
+          <span class="subtitle">Presionar Enter para empezar el juego</span>
+        </div>
+      </div>
+    </div>
+    <div id="modal">
+      <div id="modal-data">
+        <div>
+          <h2>Game over</h2>
+        </div>
+        <div>Puntuación:<div id="finish-points"></div></div>
+      </div>
+    </div>
+  </body>
+</html>
