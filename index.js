@@ -1,6 +1,6 @@
 var canvas = document.querySelector("#tetris");
 var ctx = canvas.getContext("2d");
-const BLOCK_SIZE = 20;
+const BLOCK_SIZE = window.screen.width <= 643 ? 20 : 30;
 const COLS = 10;
 const ROWS = 20;
 const WIDTH = BLOCK_SIZE * COLS;
