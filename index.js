@@ -1,6 +1,6 @@
 var canvas = document.querySelector("#tetris");
 var ctx = canvas.getContext("2d");
-const BLOCK_SIZE = 30;
+const BLOCK_SIZE = 20;
 const COLS = 10;
 const ROWS = 20;
 const WIDTH = BLOCK_SIZE * COLS;
@@ -82,6 +82,7 @@ function update(time = 0) {
       dropCounter = 0;
     }
   }
+  document.querySelector("#points").innerHTML = points;
   draw();
   valor = false;
   window.requestAnimationFrame(update);
@@ -190,7 +191,7 @@ function rotatePiece() {
 
 function showModal() {
   document.querySelector("#finish-points").innerHTML = points;
-  document.querySelector("#modal").style.visibility = "visible"
+  document.querySelector("#modal").style.visibility = "visible";
 }
 
 // Definir las formas de las piezas
@@ -207,41 +208,36 @@ const PIECE_COLORS = [
 
 //detectar teclas
 document.addEventListener("keydown", (event) => {
-  if (!wait) {
-    if (event.key == "ArrowLeft") {
-      if (!checkCollision({ x: -1, y: 0 })) {
-        piece.position.x--;
-        leftMore = true;
-      }
+  if (event.key == "ArrowLeft") {
+    if (!checkCollision({ x: -1, y: 0 })) {
+      piece.position.x--;
     }
-    if (event.key == "ArrowRight") {
-      if (!checkCollision({ x: 1, y: 0 })) {
-        piece.position.x++;
-        rightMore = true;
-      }
+  }
+  if (event.key == "ArrowRight") {
+    if (!checkCollision({ x: 1, y: 0 })) {
+      piece.position.x++;
     }
-    if (event.key == "ArrowDown") {
-      event.preventDefault();
-      if (!checkCollision({ x: 0, y: 1 })) {
-        piece.position.y++;
-        points++;
-      } else {
-        solidifyPiece();
-      }
+  }
+  if (event.key == "ArrowDown") {
+    event.preventDefault();
+    if (!checkCollision({ x: 0, y: 1 })) {
+      piece.position.y++;
+      points++;
+    } else {
+      solidifyPiece();
     }
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
+  }
+  if (event.key === "ArrowUp") {
+    event.preventDefault();
+    rotatePiece();
+    if (checkCollision({ x: 0, y: 0 })) {
+      inverse = !inverse;
       rotatePiece();
-      if (checkCollision({ x: 0, y: 0 })) {
-        inverse = !inverse;
-        rotatePiece();
-      }
     }
   }
   if (event.key == "Enter") {
     requestId = window.requestAnimationFrame(update);
   }
-  document.querySelector("#points").innerHTML = points;
 });
 
 function checkLoose() {
@@ -265,6 +261,36 @@ function checkLoose() {
 
 if (window.screen.width <= 643) {
   setTimeout(() => {
-    requestId = window.requestAnimationFrame(update);
+     requestId = window.requestAnimationFrame(update);
   }, 500);
 }
+
+var tecla1 = document.querySelector("#tecla1");
+var tecla2 = document.querySelector("#tecla2");
+var tecla3 = document.querySelector("#tecla3");
+var tecla4 = document.querySelector("#tecla4");
+tecla1.addEventListener("touchstart", () => {
+  rotatePiece();
+  if (checkCollision({ x: 0, y: 0 })) {
+    inverse = !inverse;
+    rotatePiece();
+  }
+});
+tecla2.addEventListener("touchstart", () => {
+  if (!checkCollision({ x: -1, y: 0 })) {
+    piece.position.x--;
+  }
+});
+tecla3.addEventListener("touchstart", () => {
+  if (!checkCollision({ x: 0, y: 1 })) {
+    piece.position.y++;
+    points++;
+  } else {
+    solidifyPiece();
+  }
+});
+tecla4.addEventListener("touchstart", () => {
+  if (!checkCollision({ x: 1, y: 0 })) {
+    piece.position.x++;
+  }
+});

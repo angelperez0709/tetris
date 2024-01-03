@@ -76,6 +76,21 @@ span {
   flex-direction: column;
   justify-content: space-between;
 }
+#teclas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.tecla{
+  background-color: #de9;
+  margin: 0;
+  display: inline;
+  font-size: 50px;
+  border-radius: 10px;
+  padding: 5px;
+}
 
 @media only screen and (max-width: 643px) {
     #modal-data{
@@ -87,4 +102,9 @@ span {
     #body{
         overflow: hidden;
     }
+}
+@media only screen and (min-width: 643px) {
+  #teclas{
+    display: none;
+  }
 }
