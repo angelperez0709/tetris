@@ -86,9 +86,11 @@ span {
 .tecla{
   background-color: #de9;
   margin: 0;
-  display: inline;
+  display: inline-block;
+  width: 50px;
   font-size: 50px;
   border-radius: 10px;
+  text-align: center;
   padding: 5px;
 }
 
